@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites xmlns="http://www.w3.org/1999/xhtml" time="47.87">
+    <testsuite name=" Notebook rename:Whitespaces between characters" tests="4" failures="0" errors="0" time="47.87"
+               timestamp="2014-10-06T07:08:49.800Z" package="tc_5.2.11">
+        <testcase name="Github page has been loaded" classname="tc_5.2.11" time="19.67"></testcase>
+        <testcase name="the element Shareable Link exists" classname="tc_5.2.11" time="16.011"></testcase>
+        <testcase name="Logout option exists" classname="tc_5.2.11" time="0.004"></testcase>
+        <testcase name="the title has changed successfully" classname="tc_5.2.11" time="12.185"></testcase>
+        <system-out></system-out>
+    </testsuite>
+</testsuites>
