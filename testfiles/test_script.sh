@@ -21,7 +21,7 @@ echo "12)search"
 echo "13)sessions_nd_help" 
 echo "14)shareable_link"
 echo "15)star_count" 
-echo "16)all_testcases"
+echo "16)all"
      
 #Fetch the parameters required to run the desired testsuite
 echo "Please enter all the required parameters"
