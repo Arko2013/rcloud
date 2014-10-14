@@ -33,7 +33,7 @@ read -ep "Enter rcloud login url: " url
 
 #the following command runs the desired test suite headlessly
 if [[ -n "$testsuite" && -n "$username" && -n "$password" && -n "$url" ]];then
-xvfb-run -a casperjs test --engine=slimerjs "$testsuite"/ --username="$username" --password="$password" --url="$url" --xunit=report.xml
+xvfb-run -a casperjs test --engine=slimerjs "$testsuite"/ --username="$username" --password="$password" --url="$url" --xunit=./testreports/report.xml
 else
 	echo "Please run the script again and enter all the required parameters"
 fi
