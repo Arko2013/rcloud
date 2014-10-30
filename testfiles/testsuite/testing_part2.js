@@ -1,7 +1,7 @@
 console.log('Description :');
 console.log('This is an automated testscript to be run on RCloud 1.2 to test if some of the basic features are working properly');
 console.log('The features to be tested are : Search a given item,rename a notebook, logout of RCloud and logout of Github ');
-casper.test.begin("Automation testing part-2", 10,function suite(test) {
+casper.test.begin("Automation testing part-2", 10, function suite(test) {
 
     var x = require('casper').selectXPath;//required if we detect an element using xpath
     var github_username = casper.cli.options.username;//user input github username
@@ -14,7 +14,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
     var title;//get notebook title
     var newtitle;//get modified notebook title
 
-    
+
     casper.start(rcloud_url, function () {
         casper.page.injectJs('jquery-1.10.2.js');//inject jquery codes
     });
@@ -24,7 +24,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
     });
 
     casper.wait(10000);
-    
+
     casper.then(function () {
         this.wait(9000);
         console.log("validating that the Main page has got loaded properly by detecting if some of its elements are visible. Here we are checking for Shareable Link and Logout options");
@@ -32,7 +32,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
         this.wait(4000);
 
     });
-        
+
     //Create a new Notebook.
     functions.create_notebook(casper);
 
@@ -41,7 +41,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
         title = functions.notebookname(casper);
         this.echo(" New Notebook title : " + title);
         this.wait(2000);
-        combo = github_username + ' / ' + title; 
+        combo = github_username + ' / ' + title;
     });
 
     //getting Notebook ID
@@ -92,7 +92,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
             {
                 counter = counter + 1;
                 this.wait(2000);
-            } while (this.visible(x('/html/body/div[3]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/table['+counter+']/tbody/tr/td/a')));
+            } while (this.visible(x('/html/body/div[3]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/table[' + counter + ']/tbody/tr/td/a')));
             counter = counter - 1;
             this.echo("number of search results:" + counter);
         });
@@ -101,7 +101,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
             //this.echo("Combo= "+combo);
             for (var i = 1; i <= counter; i++) {
                 this.wait(5000);
-                var result = this.fetchText(x('/html/body/div[3]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/table['+counter+']/tbody/tr/td/a'));
+                var result = this.fetchText(x('/html/body/div[3]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/table[' + counter + ']/tbody/tr/td/a'));
                 //this.echo(result);
                 this.test.assertEquals(result, combo, 'Notebook with searched id has been found');
                 break;
@@ -109,7 +109,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
             }//for closes
         });//function closes
     });
-    
+
     //getting the notebook title and modifying it
     casper.viewport(1024, 768).then(function () {
         title = functions.notebookname(casper);
@@ -131,7 +131,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
         this.echo("Modified notebook title: " + newtitle);
         this.test.assertNotEquals(newtitle, title, "the title has changed successfully");
     });
-    
+
     casper.viewport(1366, 768).then(function () {
         console.log('Logging out of RCloud');
         var z = casper.evaluate(function () {
@@ -170,7 +170,7 @@ casper.test.begin("Automation testing part-2", 10,function suite(test) {
         this.test.assertTextExists('GitHub', "Confirmed that successfully logged out of Github");
 
     });
-    
+
     casper.run(function () {
         test.done();
     });

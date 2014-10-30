@@ -14,12 +14,11 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
     var expectedresult_R = "100\n"//expected result for the above R code to be used for validation
     var invalid_Rcode = "a->50+50";//sample invalid R code
     var comment = "Sample comment";//the comment to be entered
-    var cm_cnt=0; // count of detected comments
+    var cm_cnt = 0; // count of detected comments
     var input_Pythoncode = "print 'hi'";//sample valid Python code
     var expectedresult_Python = "hi"//expected result for the above Python code to be used for validation
     var invalid_Pythoncode = "rnorm";//sample invalid Python code
 
-    
 
     casper.start(rcloud_url, function () {
         casper.page.injectJs('jquery-1.10.2.js');//inject jquery codes
@@ -30,7 +29,7 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
     });
 
     casper.wait(10000);
-    
+
     casper.then(function () {
         this.wait(9000);
         console.log("validating that the Main page has got loaded properly by detecting if some of its elements are visible. Here we are checking for Shareable Link and Logout options");
@@ -38,7 +37,7 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.wait(4000);
 
     });
-    
+
     //Get initial count of notebooks
     casper.then(function () {
         do
@@ -64,7 +63,7 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.echo("New count of notebooks = " + newcounter);
         this.test.assertNotEquals(newcounter, initialcounter, "Confirmed that new notebook has been created");
     });
-    
+
     //Add an R cell and execute its contents using a valid R code
     functions.addnewcell(casper);
     casper.viewport(1366, 768).then(function () {
@@ -83,10 +82,10 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.test.assertEquals(res, expectedresult_R, "The R code has produced the expected output");
 
     });
-    
+
     //Create a new Notebook.
     functions.create_notebook(casper);
-    
+
     //Add an R cell and execute its contents using an invalid R code
     functions.addnewcell(casper);
     casper.viewport(1366, 768).then(function () {
@@ -105,10 +104,10 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.test.assertTextExists("Error in ", "Confirmed that error has been produced for the invalid R code");
 
     });
-    
+
     //Create a new Notebook.
     functions.create_notebook(casper);
-    
+
     //Change the language of prompt cell to Python cell . Pass 1 for Markdown, 2 for Python
     casper.then(function () {
         var z = casper.evaluate(function () {
@@ -116,7 +115,7 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
             return true;
         });
     });
-    
+
     //Add a Python cell and execute its contents using a valid Python code
     functions.addnewcell(casper);
     casper.viewport(1366, 768).then(function () {
@@ -134,10 +133,10 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.test.assertEquals(result, expectedresult_Python, "The Python code has produced the expected output");
 
     });
-    
+
     //Create a new Notebook.
     functions.create_notebook(casper);
-    
+
     //Change the language of prompt cell to Python cell . Pass 1 for Markdown, 2 for Python
     casper.then(function () {
         var z = casper.evaluate(function () {
@@ -145,7 +144,7 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
             return true;
         });
     });
-    
+
     //Add a Python cell and execute its contents using an invalid Python code
     functions.addnewcell(casper);
     casper.viewport(1366, 768).then(function () {
@@ -163,26 +162,26 @@ casper.test.begin("Automation testing part-1", 16, function suite(test) {
         this.test.assertTextExists("NameError", "Confirmed that error has been produced for the invalid Python code");
 
     });
-    
+
     // Adding 3 comments
-	casper.then(function(){
-		for (var i=1;i<=3;i++){
-			functions.comments(casper, comment);
-		    this.wait(2000);
-		}// for loop closed
-	});
-	
-	casper.then(function () {
+    casper.then(function () {
+        for (var i = 1; i <= 3; i++) {
+            functions.comments(casper, comment);
+            this.wait(2000);
+        }// for loop closed
+    });
+
+    casper.then(function () {
         do
         {
-                cm_cnt = cm_cnt + 1;
-                this.wait(2000);
+            cm_cnt = cm_cnt + 1;
+            this.wait(2000);
         } while (this.visible(x('/html/body/div[3]/div/div[3]/div/div/div/div[5]/div[2]/div/div/div/div/div[' + cm_cnt + ']/div[2]/div')));
         cm_cnt = cm_cnt - 1;
         this.echo("number of comments results:" + cm_cnt);
-        this.test.assertEquals(cm_cnt,3, 'Verified that user has entered 3 comments successfully');
+        this.test.assertEquals(cm_cnt, 3, 'Verified that user has entered 3 comments successfully');
     });
-    
+
     casper.run(function () {
         test.done();
     });
