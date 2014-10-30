@@ -41,7 +41,7 @@ casper.test.begin(" Delete the notebooks", 4, function suite(test) {
         counter = counter - 1;
         //delete the notebooks
         for (var i = 1; i < counter; i++) {
-            this.click({type: 'css', path: 'ul.jqtree_common:nth-child(1) > li:nth-child(3) > ul:nth-child(2) > li:nth-child(1) > ul:nth-child(2) > li:nth-child(' + i + ') > div:nth-child(1) > span:nth-child(2) > span:nth-child(2) > span:nth-child(2) > span:nth-child(4) > i:nth-child(1)'});
+            this.click({type: 'css', path: 'ul.jqtree_common:nth-child(1) > li:nth-child(3) > ul:nth-child(2) > li:nth-child(1) > ul:nth-child(2) > li:nth-child('+i+') > div:nth-child(1) > span:nth-child(2) > span:nth-child(2) > span:nth-child(2) > span:nth-child(1) > span:nth-child(4) > i:nth-child(1)'});
         }
         this.wait(6000);
     });
@@ -61,3 +61,6 @@ casper.test.begin(" Delete the notebooks", 4, function suite(test) {
         test.done();
     });
 });
+
+
+

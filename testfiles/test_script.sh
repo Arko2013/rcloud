@@ -28,7 +28,7 @@ echo "17)all"
 echo "Please enter all the required parameters"
 read -ep "Enter testsuite name: " testsuite
 read -ep "Enter github username: " username
-read -ep "Enter github password: " password
+read -ep "Enter github password: " -s password
 read -ep "Enter rcloud login url: " url
 
 #the following command runs the desired test suite headlessly
