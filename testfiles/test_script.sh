@@ -2,38 +2,28 @@
 
 #Run the Testsuites
 
-echo "Going to the folder which contains the automated test suites and test cases "
-cd ./TESTSUITES/
-
-echo "The following test suites are currently present:"
-echo "1)notebook_naming"
-echo "2)run_all" 
-echo "3)advanced_dropdown_options"
-echo "4)deleting_notebook" 
-echo "5)history_versions" 
-echo "6)login_logout" 
-echo "7)markdown_R_cells" 
-echo "8)shareable_link"
-echo "9)comments" 
-echo "10)login_logout" 
-echo "11)other_functionalities" 
-echo "12)python_cells" 
-echo "13)saving_contents" 
-echo "14)search" 
-echo "15)sessions_nd_help" 
-echo "16)star_count" 
-echo "17)all"
+echo "Going to the folder which contains the automated test suite and related dependencies "
+cd ./testfiles/TESTSUITES/
      
-#Fetch the parameters required to run the desired testsuite
+#Fetch the parameters required to run the testsuite
 echo "Please enter all the required parameters"
-read -ep "Enter testsuite name: " testsuite
+read -ep "Enter the Report name : " report
+read -ep "Enter rcloud login url: " url
+read -ep "Do you want to run the test headlessly?(y/n) : " choice
 read -ep "Enter github username: " username
 read -ep "Enter github password: " -s password
-read -ep "Enter rcloud login url: " url
 
-#the following command runs the desired test suite headlessly
-if [[ -n "$testsuite" && -n "$username" && -n "$password" && -n "$url" ]];then
-xvfb-run -a casperjs test --engine=slimerjs "$testsuite"/ --username="$username" --password="$password" --url="$url" --xunit=./testreports/report.xml
+#the following command runs the desired test suite headlessly or with UI acording to choice
+if  [[ -n "$testsuite" && -n "$url" && -n "$choice" && -n "$username"  && -n "$password" ]]; 
+then
+	if  [[ "$choice" == "y" ]]; 
+	then
+		echo "Running headlessly"
+		sudo xvfb-run -a casperjs test --engine=slimerjs testsuite/ --username="$username" --password="$password" --url="$url" --xunit=./testreports/${report}.xml
+	else 
+		echo "Running with UI"
+		sudo casperjs test --engine=slimerjs testsuite/ --username="$username" --password="$password" --url="$url" --xunit=./testreports/${report}.xml
+	fi 
 else
 	echo "Please run the script again and enter all the required parameters"
 fi
