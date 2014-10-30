@@ -14,7 +14,7 @@ read -ep "Enter github username: " username
 read -ep "Enter github password: " -s password
 
 #the following command runs the desired test suite headlessly or with UI acording to choice
-if  [[ -n "$testsuite" && -n "$url" && -n "$choice" && -n "$username"  && -n "$password" ]]; 
+if  [[ -n "$url" && -n "$choice" && -n "$username"  && -n "$password" ]]; 
 then
 	if  [[ "$choice" == "y" ]]; 
 	then
