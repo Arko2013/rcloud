@@ -3,7 +3,7 @@
 #Run the Testsuites
 
 echo "Going to the folder which contains the automated test suite and related dependencies "
-cd ./testfiles/TESTSUITES/
+cd ./TESTSUITES/
      
 #Fetch the parameters required to run the testsuite
 echo "Please enter all the required parameters"
