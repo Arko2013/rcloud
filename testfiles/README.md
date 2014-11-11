@@ -1,4 +1,4 @@
-In a desired directory ,create a folder named "TESTING" . In the installation steps mentioned below, we will refer to this folder for all installations 
+In a desired directory,hereby to be referred as <path> ,create a folder named "TESTING" . In the installation steps mentioned below, we will refer to this folder(<path>/TESTING) for all installations 
 
 DEPENDENCIES:
 ---------
@@ -26,10 +26,13 @@ INSTALLATION OF SLIMERJS:
 
 ```sh
 Following steps needs to be followed
-  - Clone Slimerjs from the following repository:
-    git clone https://github.com/Arko2013/slimerjs.git
+  - wget http://download.slimerjs.org/releases/0.9.3/slimerjs-0.9.3-linux-x86_64.tar ( for 64-bit system)
+  - wget http://download.slimerjs.org/releases/0.9.3/slimerjs-0.9.3-linux-x86_64.tar ( for 32-bit system)
+  - sudo tar -xvjf slimerjs-0.9.3-linux-x86_64.tar ( for 64-bit system)
+  - tar -xvjf slimerjs-0.9.3-linux-i686.tar.bz2 ( for 32-bit system)
+  - sudo mv slimerjs-0.9.3 slimerjs 
   - sudo ln -s <path>/TESTING/slimerjs /usr/local/share/slimerjs
-  - sudo ln -s /usr/local/share/slimerjs/src/slimerjs /usr/local/bin/slimerjs
+  - sudo ln -s /usr/local/share/slimerjs/slimerjs /usr/local/bin/slimerjs
   - To ensure that Slimerjs has been installed properly, check the version using :
     slimerjs --version 
 
@@ -51,16 +54,6 @@ Following steps needs to be followed
     casperjs --version 
   - For Headless Testing using Casperjs , install xvfb with the following command: :
     sudo apt-get install xvfb 
-```
-
-
-Copy the files  application.ini, omni.ja, slimerjs and slimerjs.py under "slimerjs" folder to the "casperjs" folder using the following commands:
-
-```sh
-  - sudo cp <path>/TESTING/slimerjs/src/slimerjs <path>/TESTING/casperjs/
-  - sudo cp <path>/TESTING/slimerjs/src/slimerjs.py <path>/TESTING/casperjs/
-  - sudo cp <path>/TESTING/slimerjs/src/application.ini <path>/TESTING/casperjs/
-  - sudo cp <path>/TESTING/slimerjs/omni.ja <path>/TESTING/casperjs/
 ```
 
 RUNNING A SAMPLE TESTSUITE
@@ -94,7 +87,7 @@ After successful execution an xml report(say,report1.xml) for the testsuite will
 * xtranotebooksdelete.js -> A function that can be called any time ( just like calling any other testcase as mentioned on top ) for deleting the notebooks which might have got created during running a testsuite/testcase
 * jquery-1.10.2 -> This file is required to be invoked so that jquery can be used while writing the test cases .
 
-The above 3 functions have been kept inside the TESTING folder so that they be called while running a Testsuite or an indivifual Testcase
+The above 3 functions have been kept inside the TESTSUITES folder so that they be called while running a Testsuite or an indivifual Testcase
 
 
 
